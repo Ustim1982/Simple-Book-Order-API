@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "b137f343-98c1-4a08-a69a-a2ad960c8b30",
+		"name": "Simple Book API",
+		"description": "[https://youtu.be/VywxIQ2ZXw4?t=2928](https://youtu.be/VywxIQ2ZXw4?t=2928)\n\n[https://github.com/vdespa/introduction-to-postman-course/blob/main/simple-books-api.md](https://github.com/vdespa/introduction-to-postman-course/blob/main/simple-books-api.md)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42f94160-e3de-409b-b8bf-2f668561a125",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    let a = {",
+							"        \"name\": \"John\"",
+							"    };",
+							"    let b = {",
+							"        \"name\": \"Jane\"",
+							"    };",
+							"    pm.expect(a).to.not.eql(b, '1');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status should be OK\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"OK\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "52022546-7265-47eb-b203-a39834dada4b",
+						"exec": [
+							"console.clear();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "063912f2-d9d2-46cd-9af1-37e26639d778",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/status",
+				"description": "This Postman request is named \"API Status\" and uses the GET method to retrieve the status of an API. The request is made to the following endpoint: \"[https://simple-books-api.glitch.me/status\"](https://simple-books-api.glitch.me/status).\n\nThe expected status code for a successful response is 200. Additionally, the response body should contain the following JSON object: {\"status\":\"OK\"}.\n\nThis request can be used to check the operational status of the API and ensure that it is functioning correctly.\n\n**Tests**\n\nThis code contains two Postman tests for checking the status code and status message of an API response.\n\nTest 1: Status code is 200  \nThis test verifies whether the status code of the API response is equal to 200.\n\nTest 2: Status should be OK  \nThis test checks whether the status message (retrieved as JSON data from the response) is equal to \"OK\".  \n\n`pm.test(\"Status code is 200\", function () {   pm.response.to.have.status(200);   });`\n\n`pm.test(\"Status should be OK\", function () {   var jsonData = pm.response.json();   pm.expect(jsonData.status).to.eql(\"OK\");   });`"
+			},
+			"response": []
+		},
+		{
+			"name": "HEAD API Status",
+			"_postman_id": "99d646c8-d1f2-4756-92fc-d1d2eb93c8a0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": "{{baseUrl}}/status",
+				"description": "## Request Description:\n\nThis Postman request is named \"API Status\" and uses the GET method to retrieve the status of an API. The request is made to the following endpoint: \"[https://simple-books-api.glitch.me/status\"](https://simple-books-api.glitch.me/status\").\n\nThe expected status code for a successful response is 200. Additionally, the response body should contain the following JSON object: {\"status\":\"OK\"}.\n\nThis request can be used to check the operational status of the API and ensure that it is functioning correctly."
+			},
+			"response": []
+		},
+		{
+			"name": "List of books",
+			"_postman_id": "72e5034f-facf-4f58-afb6-f1059758a047",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "non-fiction",
+							"description": "optional. fiction or non-fiction",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "2",
+							"description": "a number between 1 and 20",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This Postman request is named \"List of books\" and uses the GET method to retrieve a list of books from an API. The request is made to the following endpoint: \"[https://simple-books-api.glitch.me/books](https://simple-books-api.glitch.me/books)\".\n\nThe expected status code for a successful response is 200. The response body will contain an array of book objects in JSON format. Each book object will have the following properties: \"id\" (unique identifier), \"name\" (title of the book), \"type\" (fiction or non-fiction), and \"available\" (availability status).\n\nHere is an example of the expected response body:\n\n```\n[\n  {\n    \"id\": 1,\n    \"name\": \"The Russian\",\n    \"type\": \"fiction\",\n    \"available\": true\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Just as I Am\",\n    \"type\": \"non-fiction\",\n    \"available\": false\n  },\n  {\n    \"id\": 3,\n    \"name\": \"The Vanishing Half\",\n    \"type\": \"fiction\",\n    \"available\": true\n  },\n  {\n    \"id\": 4,\n    \"name\": \"The Midnight Library\",\n    \"type\": \"fiction\",\n    \"available\": true\n  },\n  {\n    \"id\": 5,\n    \"name\": \"Untamed\",\n    \"type\": \"non-fiction\",\n    \"available\": true\n  },\n  {\n    \"id\": 6,\n    \"name\": \"Viscount Who Loved Me\",\n    \"type\": \"fiction\",\n    \"available\": true\n  }\n]\n\n\n```\n\nThis request can be used to retrieve the list of books available in the API and obtain information about each book, such as its title, genre, and availability status."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a single book",
+			"_postman_id": "47c52a0a-8557-444e-8a32-03afd2007e9d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books/:bookId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						":bookId"
+					],
+					"variable": [
+						{
+							"key": "bookId",
+							"value": "2",
+							"type": "string"
+						}
+					]
+				},
+				"description": "## Request Description:\n\nThis Postman request is named \"Get a single book\" and uses the GET method to retrieve detailed information about a specific book from an API. The request is made to the following endpoint: \"[https://simple-books-api.glitch.me/books/:bookId](https://simple-books-api.glitch.me/books/:bookId)\", where \":bookId\" is a path variable that should be replaced with the actual ID of the desired book.\n\nThe expected status code for a successful response is 200. The response body will contain a JSON object with detailed information about the book. The information will include the following properties: \"id\" (unique identifier), \"name\" (title of the book), \"author\" (name of the author/authors), \"isbn\" (ISBN number of the book), \"type\" (fiction or non-fiction), \"price\" (price of the book), \"current-stock\" (current stock quantity), and \"available\" (availability status).\n\nFor example, if the book ID is 1, the expected response body would be:\n\n```\n{\n  \"id\": 1,\n  \"name\": \"The Russian\",\n  \"author\": \"James Patterson and James O. Born\",\n  \"isbn\": \"1780899475\",\n  \"type\": \"fiction\",\n  \"price\": 12.98,\n  \"current-stock\": 12,\n  \"available\": true\n}\n\n\n```\n\nThis request can be used to retrieve detailed information about a specific book by providing its unique ID as a path variable in the endpoint URL. The response will provide comprehensive data about the book, including its title, author, ISBN, type, price, current stock, and availability status."
+			},
+			"response": []
+		},
+		{
+			"name": "Submit an order",
+			"_postman_id": "d9790498-dac2-4867-bc8f-adafa2df4c90",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{accessToken}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookId\": 1,\n    \"customerName\": \"{{$randomFullName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/orders",
+				"description": "## Request Description:\n\nThis Postman request allows you to submit a new order by sending a POST request to the \"/orders\" endpoint. Please note that this operation requires authentication.\n\nThe request should have the following characteristics:\n\n- Method: POST\n- Endpoint: /orders\n- Authorization: Bearer\n    \n\nThe request body should be in JSON format and include the following properties:\n\n- bookId: An integer representing the ID of the book being ordered (Required).\n- customerName: A string specifying the name of the customer placing the order (Required).\n    \n\nHere is an example of the request with using random full name \"`{{$randomFullName}}`\" instead the hardcoded one:\n\n```\nPOST /orders\nAuthorization: Bearer <YOUR TOKEN>\n{\n  \"bookId\": 1,\n  \"customerName\": \"{{$randomFullName}}\"\n}\n\n```\n\nUpon successful submission, the response body will contain the order ID. This ID will be provided in the response, allowing you to track or reference the specific order that was placed.\n\nYou can use this request to submit a new order by providing the book ID and customer name, ensuring the request is authenticated using the provided token."
+			},
+			"response": []
+		},
+		{
+			"name": "Register API Client",
+			"_postman_id": "c557859d-313f-41fd-bf2b-8838be96402d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"clientName\": \"Dmitry_Ustimenko\",\n   \"clientEmail\": \"dmitry.ustimenko@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api-clients",
+				"description": "## Request Description:\n\nTo submit or view an order, it is required to register your API client. This can be done by sending a POST request to the \"/api-clients\" endpoint.\n\nThe request should have the following characteristics:\n\n- Method: POST\n- Endpoint: /api-clients\n    \n\nThe request body should be in JSON format and include the following properties:\n\n- clientName: A string representing the name of the API client.\n- clientEmail: A string representing the email address of the API client.\n    \n\nHere is an example of the request:\n\n```\nPOST /api-clients\n{\n   \"clientName\": \"Dmitry\",\n   \"clientEmail\": \"dmitry@example.com\"\n}\n\n```\n\nUpon successful registration, the response body will contain the access token. This access token will be valid for 7 days and can be used to authenticate subsequent requests for submitting or viewing orders.\n\nIt is important to note that if an API client with the same clientEmail or clientName already exists, a status code 409 will be returned, indicating a conflict. In such cases, you should modify the values for clientEmail and clientName to unique values and retry the request.\n\nBy registering your API client, you will receive an access token that allows you to interact with the API and perform operations such as submitting or viewing orders."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "28649436-0f2f-4f33-9029-e7ca50fed97c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4350411a-90ff-48e6-ad89-da21191f63c0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c590e7a8-4790-4219-a44a-29c2ba495b06",
+			"key": "baseUrl",
+			"value": "https://simple-books-api.glitch.me",
+			"type": "string"
+		},
+		{
+			"id": "9ab37bb3-af6b-4d20-8c7c-1eb06005ffa2",
+			"key": "accessToken",
+			"value": "-",
+			"type": "string"
+		}
+	]
+}
